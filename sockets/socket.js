@@ -13,12 +13,15 @@ io.on('connection', (client) =>  {
     usuarioConectado( uid );
 
     // Ingresar al usuario a una sala en particular
-    // sala global, client.id, 5f298534ad4169714548b785
+    // sala global, client.id,
+    
+    
     client.join( uid );
 
     // Escuchar del cliente el mensaje-personal
     client.on('mensaje-personal', async( payload ) => {
         // TODO: Grabar mensaje
+        console.log(payload);
         await grabarMensaje( payload );
         io.to( payload.para ).emit('mensaje-personal', payload );
     })
@@ -26,6 +29,7 @@ io.on('connection', (client) =>  {
 
     client.on('disconnect', () => {
         usuarioDesconectado(uid);
+      
     });
 
     
